@@ -32,7 +32,7 @@ def register():
     name = request.form['name']
     email = request.form['email']
     password = request.form['password']
-    role_type = request.form['user_type'] # รับค่า 'EXTERNAL'
+    role_type = request.form['user_type'] #  'EXTERNAL'
 
     cur = mysql.connection.cursor()
     try:
@@ -41,7 +41,7 @@ def register():
                     (name, email, password, role_type))
         mysql.connection.commit()
         cur.close()
-        return redirect(url_for('login_general_process')) # สมัครเสร็จเด้งไปหน้าล็อกอิน
+        return redirect(url_for('login_general_process')) # go to login page after successful registration
         
     except IntegrityError as e:
         cur.close()
