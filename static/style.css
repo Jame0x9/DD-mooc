@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #b7b08a;
+    text-align: center;
+    margin: 0;
+}
+
+h1 {
+    margin-top: 40px;
+    font-size: 40px;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+.button {
+    display: inline-block;
+    padding: 15px 30px;
+    margin: 20px;
+    border: 3px solid #ddd;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+    background-color: #c9c39a;
+}
+
+.button:hover {
+    background-color: #a9a27a;
+}
+
+.course-box {
+    border: 1px solid #333;
+    padding: 15px;
+    margin: 15px auto;
+    width: 300px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.review-box {
+    border: 1px solid #333;
+    padding: 10px;
+    margin: 10px auto;
+    width: 400px;
+    background-color: #eee;
+    border-radius: 10px;
+}
+
+input, button {
+    padding: 8px;
+    margin: 5px;
+}

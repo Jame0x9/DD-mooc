@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Courses</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>Courses</h1>
+
+{% for course in courses %}
+<div class="course-box">
+    <h3>{{ course[1] }}</h3>
+    <p>Price: ${{ course[2] }}</p>
+    <a class="button" href="/enroll/{{ course[0] }}">Buy</a>
+</div>
+{% endfor %}
+
+<!-- <a class="button" href="/reviews">Reviews</a> -->
+
+</body>
+</html>

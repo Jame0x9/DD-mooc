@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - SHIDA MOOC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #FDFCF0; /* Light background from second image */
+        }
+
+        /* Container from previous images */
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Left Side (Red Maroon Background) */
+        .left-side {
+            flex: 1;
+            background-color: #800000; /* Red Maroon */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Gray Rounded Rectangle for Icon */
+        .icon-container {
+            width: 350px;
+            height: 350px;
+            background-color: #D9D9D9; /* Gray */
+            border-radius: 60px;
+            border: 8px solid #000; /* Thick black border from image */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Person at Desk Icon (Simplified representation) */
+        .icon-container img {
+            width: 80%;
+            height: auto;
+        }
+
+        /* Right Side (Form Area) */
+        .right-side {
+            flex: 1;
+            background-color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            color: #000;
+        }
+
+        /* Title from third image */
+        .sign-up-title {
+            font-size: 3rem;
+            font-weight: bold;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .user-type-text {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        /* Sign Up Form from fourth image */
+        .signup-form {
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Flex container for First/Last name */
+        .name-fields {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+        }
+
+        /* Input styling from third/fourth images */
+        .input-field {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 25px;
+            background-color: #D9D9D9; /* Light gray from image */
+            font-size: 1rem;
+            color: #555;
+            text-align: left; /* Image shows text on left */
+            padding-left: 20px;
+        }
+
+        /* Long input for SCHOOL field */
+        .school-field {
+            grid-column: span 2;
+        }
+
+        /* Submit Button from fourth image */
+        .submit-btn {
+            width: 200px;
+            padding: 15px;
+            background-color: #00E6B8; /* Teal color */
+            color: black;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #00C49F;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="left-side">
+            <div class="icon-container">
+                <svg viewBox="0 0 24 24" width="200" height="200" fill="none" stroke="black" stroke-width="1.5">
+                    <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    <path d="M7 10v4m10-4v4"></path>
+                </svg>
+            </div>
+        </div>
+
+        <div class="right-side">
+            <h1 class="sign-up-title">Sign Up</h1>
+            <p class="user-type-text">for general user</p>
+                <form class="signup-form" action="{{ url_for('register') }}" method="POST">
+    <div class="name-fields">
+        <input type="text" name="name" class="input-field" placeholder="Full Name" required>
+    </div>
+    
+    <input type="email" name="email" class="input-field" placeholder="Email (for login)" required  autocomplete="off">
+    <input type="password" name="password" class="input-field" placeholder="Password" required autocomplete="new-password">
+    
+    <input type="hidden" name="user_type" value="EXTERNAL">
+    
+    <input type="text" name="school" class="input-field school-field" placeholder="SCHOOL">
+    
+    <div style="width: 100%; display: flex; justify-content: center;">
+        <button type="submit" class="submit-btn">Submit</button>
+    </div>
+</form>
+          
+
+        </div>
+    </div>
+
+</body>
+</html>

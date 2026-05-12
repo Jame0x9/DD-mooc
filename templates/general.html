@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHIDA MOOC - Welcome</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* 左側：品牌形象區 */
+        .left-side {
+            flex: 1;
+            background-color: #800000; /* 師大紅 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .illustration-card {
+            background-color: #D9D9D9;
+            width: 350px;
+            height: 350px;
+            border-radius: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 8px solid #000;
+        }
+
+        .illustration-card img {
+            width: 80%;
+            height: auto;
+        }
+
+        /* 右側：登入按鈕區 */
+        .right-side {
+            flex: 1;
+            background-color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .user-icon {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+
+        /* 按鈕樣式 */
+        .btn {
+            width: 280px;
+            padding: 15px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            font-style: italic;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.2s;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-signup {
+            background-color: #FFB84D; /* 橘黃色 */
+            color: #3D5A80;
+        }
+
+        .btn-login {
+            background-color: #66CC91; /* 粉綠色 */
+            color: #2F3E46;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        /* 響應式調整 */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .left-side {
+                flex: 0.4;
+            }
+            .illustration-card {
+                width: 200px;
+                height: 200px;
+                border-radius: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="left-side">
+        <div class="illustration-card">
+            <svg viewBox="0 0 24 24" width="150" height="150" fill="none" stroke="black" stroke-width="1.5">
+                <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+        </div>
+    </div>
+
+    <div class="right-side">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="User Icon" class="user-icon">
+        
+        <a href= "{{ url_for('general_register') }}" class="btn btn-signup">Sign Up</a>
+        <a href="{{ url_for('login_general_process') }}" class="btn btn-login">Log In</a>
+    </div>
+
+</body>
+</html>

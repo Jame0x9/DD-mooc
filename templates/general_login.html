@@ -1,0 +1,142 @@
+<DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Left Side - Dark Red */
+        .left-panel {
+            flex: 1;
+            background-color: #800000; /* Deep Red */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .illustration-box {
+            width: 70%;
+            height: 60%;
+            background-color: #d3d3d3; /* Light Grey placeholder */
+            border-radius: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Replace with an <img> tag for your specific icon */
+        }
+
+        /* Right Side - Beige/Olive */
+        .right-panel {
+            flex: 1;
+            background-color: #c5c5a5; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .logo {
+            width: 120px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 10px 0;
+            color: #000;
+        }
+
+        .subtext {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .input-group {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        input {
+            padding: 15px 25px;
+            border-radius: 30px;
+            border: none;
+            background-color: #dcdcdc;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .footer-row {
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 60%;
+        }
+
+        .login-btn {
+            background-color: #00d1b2; /* Cyan/Teal */
+            color: #000;
+            padding: 12px 25px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .forgot-pass {
+            font-size: 0.9rem;
+            color: #333;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="left-panel">
+        <div class="illustration-box">
+            <span style="font-size: 200px;">👤</span>
+        </div>
+    </div>
+
+   
+    <div class="right-panel">
+        <form action="{{ url_for('login_general_process') }}" method="POST" class="right-panel">
+        <img src="{{ url_for('static', filename='logo_ntnu.svg') }}" alt="NTNU Logo" class="logo">
+        <h1>Log In</h1>
+        <p class="subtext">for General User</p>
+
+        <div class="input-group">
+            <input type="email" name="email" placeholder="Email" required  autocomplete="off">
+            <input type="password" name="password" placeholder="Password" required autocomplete="new-password">
+        </div>
+
+        <div class="footer-row">
+            <button type="submit" class="login-btn">Login Now</button>
+            <a href="#" class="forgot-pass">forgot password?</a>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+</div>
+
+</body>
+</html>

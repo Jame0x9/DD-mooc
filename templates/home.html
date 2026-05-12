@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SHIDA MOOC</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>SHIDA MOOC</h1>
+
+<center><img src="{{ url_for('static', filename='logo.jpg') }}" alt="SHIDA MOOC Logo" height="200px" style="border-radius: 50%;"></center>
+
+<div class="container">
+    <a class="button" href="{{ url_for('login_ntnu') }}">NTNU student</a>
+
+    <a class="button" href="{{ url_for('general_page') }}">General public</a>
+    <br>
+    <a class="button" href="#">Admin</a>
+</div>
+
+</body>
+</html>
