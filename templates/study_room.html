@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHIDA MOOC - Study Room</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #1a1a1a;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            padding: 0 50px;
+        }
+
+        .nav-title {
+            color: #FFFFFF;
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        /* Banner (แสดงชื่อวิชา) */
+        .banner {
+            background-color: #E6E280; /* สีเหลือง */
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .banner h1 {
+            font-size: 1.8rem;
+            font-weight: normal;
+            color: #000000;
+        }
+
+        /* Content Area */
+        .content {
+            flex: 1;
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+
+        /* Module / Chapter Card */
+        .module-card {
+            background-color: #D9D9D9; /* สีเทา */
+            width: 100%;
+            max-width: 800px;
+            border-radius: 25px;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .module-title {
+            font-size: 1.5rem;
+            color: #000;
+        }
+
+        /* Link Button */
+        .link-btn {
+            background-color: #E67E22; /* สีส้ม */
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 10px 35px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        .link-btn:hover {
+            background-color: #D35400;
+            transform: scale(1.05);
+        }
+
+        /* Footer Black Bar */
+        .footer {
+            background-color: #000000;
+            height: 60px;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .empty-message {
+            color: #888;
+            font-size: 1.2rem;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="{{ url_for('dashboard') }}" class="nav-title">SHIDA MOOC</a>
+    </nav>
+
+    <div class="banner">
+        <h1>{{ course_title }}</h1>
+    </div>
+
+    <div class="content">
+        {% if modules %}
+            {% for mod in modules %}
+            <div class="module-card">
+                <div class="module-title">{{ mod.module_title }}</div>
+                
+                {% if mod.content_url %}
+                    <a href="{{ mod.content_url }}" target="_blank" class="link-btn">Link</a>
+                {% else %}
+                    <span style="color: #888;">Coming Soon</span>
+                {% endif %}
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty-message">No chapters available for this course yet.</div>
+        {% endif %}
+    </div>
+
+    <div class="footer"></div>
+
+</body>
+</html>

@@ -53,8 +53,8 @@ CREATE TABLE IF NOT EXISTS `Courses` (
   `instructor_id` INT NOT NULL,
   `title` VARCHAR(255) NOT NULL,
   `description` TEXT NULL,
-  `original_price` DECIMAL(10, 2) NOT NULL,
-  `discount_price` DECIMAL(10, 2) NOT NULL,
+  `price` DECIMAL(10, 2) NOT NULL,
+
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_course_instructor`
     FOREIGN KEY (`instructor_id`)
@@ -136,3 +136,104 @@ CREATE TABLE IF NOT EXISTS `Owned_Courses` (
     REFERENCES `Courses` (`id`)
     ON DELETE CASCADE
 ) ENGINE = InnoDB;
+
+
+
+// Create data
+
+==================================
+
+
+USE `shida_mooc`;
+
+-- add Users (role_type = 'EXTERNAL')
+INSERT INTO `Users` (`email`, `password`, `name`, `role_type`) VALUES
+('alice@example.com', 'pass123', 'Alice Johnson', 'EXTERNAL'),
+('bob@example.com', 'pass123', 'Bob Smith', 'EXTERNAL'),
+('charlie@example.com', 'pass123', 'Charlie Brown', 'EXTERNAL'),
+('david@example.com', 'pass123', 'David Miller', 'EXTERNAL'),
+('eva@example.com', 'pass123', 'Eva Green', 'EXTERNAL');
+
+
+//Create user NTNU student
+
+======================================================
+
+-- เพิ่มข้อมูลในตาราง Users (role_type = 'STUDENT')
+INSERT INTO `Users` (`email`, `password`, `name`, `role_type`) VALUES
+('st001@ntnu.edu.tw', 'ntnu123', 'John Doe', 'STUDENT'),
+('st002@ntnu.edu.tw', 'ntnu123', 'Jane Watson', 'STUDENT'),
+('st003@ntnu.edu.tw', 'ntnu123', 'Mike Ross', 'STUDENT'),
+('st004@ntnu.edu.tw', 'ntnu123', 'Rachel Zane', 'STUDENT'),
+('st005@ntnu.edu.tw', 'ntnu123', 'Harvey Specter', 'STUDENT');
+
+-- นำ ID จากตาราง Users มาผูกกับ Student ID (สมมติ ID เริ่มที่ 6 ต่อจาก General User)
+-- ถ้าคุณรัน SQL นี้ต่อจากข้างบนทันที เลข ID จะรันต่อเนื่องกันครับ
+INSERT INTO `Student_Details` (`user_id`, `student_id`, `department`) VALUES
+(6, '41100001', 'Computer Science'),
+(7, '41100002', 'Design'),
+(8, '41100003', 'Mathematics'),
+(9, '41100004', 'Physics'),
+(10, '41100005', 'Music');
+
+
+data for course
+
+-- add instructor
+INSERT INTO `Instructors` (`name`, `title`, `department`, `bio`) VALUES
+('張鈞法', 'teacher', 'Computer Science.', 'Master of taekwondo');
+('紀博文','teacher','Computer Science.','master of MMA');
+('蔣宗哲','teacher','Computer Science.','Master of Muay Thai');
+
+
+-- add course
+INSERT INTO `Courses` (`instructor_id`, `title`, `description`, `price`) VALUES
+(1, 'Python for Beginners', 'Learn Python from scratch', 1000.00),
+(2, 'Database Systems', 'SQL and Relational Algebra', 1200.00),
+(3, 'Web Development', 'Flask and MySQL Integration', 1500.00);
+
+(1,'C language','Programming language',1400.00);
+(2,'Quantum computer','Introduction quantum and computer programming',2500.00);
+
+
+
+
+
+
+
+
+
+
+
+data for course module
+
+
+INSERT INTO Modules (course_id, title, sort_order) VALUES 
+(1, 'Chapter 1: Relational Algebra & Calculus', 1),
+(1, 'Chapter 2: SQL Fundamentals', 2);
+
+
+INSERT INTO Materials (module_id, type, content_url) VALUES 
+(1, 'PDF', 'https://example.com/relational_algebra.pdf'),
+(2, 'VIDEO', 'https://example.com/sql_video.mp4');
+
+-- --------------------------------------------------------
+
+INSERT INTO Modules (course_id, title, sort_order) VALUES 
+(2, 'Chapter 1: OSI Model Basics', 1),
+(2, 'Chapter 2: TCP/IP Protocols', 2);
+
+INSERT INTO Materials (module_id, type, content_url) VALUES 
+(3, 'VIDEO', 'https://example.com/osi_model.mp4'),
+(4, 'PDF', 'https://example.com/tcp_ip.pdf');
+
+
+
+
+
+
+
+
+//run 
+
+ngrok http 5000

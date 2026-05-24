@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHIDA MOOC - Owned Courses</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* 1. Navbar (Black Header) */
+        .navbar {
+            background-color: #1a1a1a;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            padding: 0 50px;
+        }
+
+        .nav-title {
+            color: #FFFFFF;
+            font-size: 1.6rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-decoration: none;
+
+        }
+
+          .nav-logo {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        /* 2. Banner (Yellow section) */
+        .banner {
+            background-color: #E6E280; /* สีเหลืองอ่อนตามภาพ */
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 2px solid #5BC0DE; /* เส้นขอบสีฟ้าจางๆ ตามภาพ */
+        }
+
+        .banner h1 {
+            font-family: 'Georgia', serif; /* ฟอนต์แบบมีหัว */
+            font-size: 2rem;
+            font-weight: 800;
+            color: #000000;
+        }
+
+        /* 3. Content Area (White background) */
+        .content {
+            flex: 1;
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+
+        /* Course Card */
+        .course-card {
+            background-color: #D9D9D9;
+            width: 100%;
+            max-width: 800px;
+            border-radius: 25px; /* ขอบมน */
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .course-title {
+            font-size: 1.5rem;
+            color: #000;
+            font-weight: 500;
+        }
+
+        /* Study Now Button */
+        .study-btn {
+            background-color: #E67E22; /* สีส้ม */
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 12px 35px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        .study-btn:hover {
+            background-color: #D35400;
+            transform: scale(1.05);
+        }
+
+        /* 4. Footer (Black bottom) */
+        .footer {
+            background-color: #000000;
+            color: #FFFFFF;
+            padding: 20px 50px;
+            font-size: 1.2rem;
+        }
+
+        .footer span {
+            font-size: 0.9rem;
+            color: #CCCCCC;
+        }
+
+        /* Empty State */
+        .empty-message {
+            font-size: 1.2rem;
+            color: #888;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="{{ url_for('dashboard') }}"><img src="{{ url_for('static', filename='logo.jpg') }}" alt="Logo" class="nav-logo"></a>
+            <span class="nav-title">SHIDA MOOC</span>
+    </nav>
+
+    <div class="banner">
+        <h1>Owned Course</h1>
+    </div>
+
+    <div class="content">
+        {% if owned_courses %}
+            {% for course in owned_courses %}
+            <div class="course-card">
+                <div class="course-title">CSU00{{ course.id }} {{ course.title }}</div>
+                
+                <a href="/study/{{ course.id }}" class="study-btn">Study Now</a>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty-message">You don't own any courses yet. <a href="{{ url_for('courses') }}">Browse Courses</a></div>
+        {% endif %}
+    </div>
+
+    <footer class="footer">
+        Idemy <span>©2026</span>
+    </footer>
+
+</body>
+</html>

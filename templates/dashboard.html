@@ -1,0 +1,165 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Courses</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>Courses</h1>
+
+{% for course in courses %}
+<div class="course-box">
+    <h3>{{ course[1] }}</h3>
+    <p>Price: ${{ course[2] }}</p>
+    <a class="button" href="/enroll/{{ course[0] }}">Buy</a>
+</div>
+{% endfor %}
+
+  //  <a class="button" href="/reviews">Reviews</a>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHIDA MOOC - Dashboard</title>
+    <style>
+        /* 基礎重設 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        /* 1. 上方黑色導覽列 (Navbar) */
+        .navbar {
+            background-color: #1a1a1a; /* 接近全黑的深色背景 */
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        /* 左側 Logo 與標題 */
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-logo {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .nav-title {
+            color: #ffffff;
+            font-size: 1.6rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* 中間選單連結 */
+        .nav-menu {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-item {
+            color: #b3b3b3;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-item:hover {
+            color: #ffffff; /* 滑鼠移上去變白色 */
+        }
+
+        /* 右側按鈕 */
+        .study-btn {
+            background-color: #d97706; /* 橘黃色按鈕 */
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .study-btn:hover {
+            background-color: #b45309;
+            transform: scale(1.03);
+        }
+
+        /* 2. 中間黃色歡迎區塊 (Welcome Banner) */
+        .welcome-banner {
+            background-color: #eef296; /* 淺黃色背景，與圖片一致 */
+            padding: 60px 50px;
+            text-align: left;
+        }
+
+        .welcome-text {
+            font-family: 'Georgia', serif; /* 使用襯線字體還原圖片風格 */
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #000000;
+        }
+
+        /* 3. 下方內容區區塊（預留給課程或文章） */
+        .content-area {
+            padding: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="{{ url_for('dashboard') }}"><img src="{{ url_for('static', filename='logo.jpg') }}" alt="Logo" class="nav-logo"></a>
+            <span class="nav-title">SHIDA MOOC</span>
+        </div>
+        
+        <ul class="nav-menu">
+            <li><a href="{{ url_for('courses') }}" class="nav-item">Course</a></li>
+            <li><a href="#" class="nav-item">Hall of frame</a></li>
+            <li><a href="#" class="nav-item">Article</a></li>
+            <li><a href="{{ url_for('logout') }}" class="nav-item" style="color: #ef4444;">Logout</a></li>
+        </ul>
+
+        <a href="{{ url_for('owned_courses') }}" class="study-btn">Study Now</a>
+    </nav>
+
+    <div class="welcome-banner">
+        <h1 class="welcome-text">
+            {% if session['user_name'] %}
+                Welcome {{ session['user_name'] }}
+            {% else %}
+                Welcome Guest
+            {% endif %}
+        </h1>
+    </div>
+
+    <div class="content-area">
+    </div>
+
+</body>
+</html>
