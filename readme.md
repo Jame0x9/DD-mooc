@@ -155,7 +155,7 @@ INSERT INTO `Users` (`email`, `password`, `name`, `role_type`) VALUES
 ('eva@example.com', 'pass123', 'Eva Green', 'EXTERNAL');
 
 
-//Create user NTNU student
+-- Create user NTNU student
 
 ======================================================
 
@@ -167,8 +167,7 @@ INSERT INTO `Users` (`email`, `password`, `name`, `role_type`) VALUES
 ('st004@ntnu.edu.tw', 'ntnu123', 'Rachel Zane', 'STUDENT'),
 ('st005@ntnu.edu.tw', 'ntnu123', 'Harvey Specter', 'STUDENT');
 
--- นำ ID จากตาราง Users มาผูกกับ Student ID (สมมติ ID เริ่มที่ 6 ต่อจาก General User)
--- ถ้าคุณรัน SQL นี้ต่อจากข้างบนทันที เลข ID จะรันต่อเนื่องกันครับ
+
 INSERT INTO `Student_Details` (`user_id`, `student_id`, `department`) VALUES
 (6, '41100001', 'Computer Science'),
 (7, '41100002', 'Design'),
@@ -177,7 +176,7 @@ INSERT INTO `Student_Details` (`user_id`, `student_id`, `department`) VALUES
 (10, '41100005', 'Music');
 
 
-data for course
+-- data for course
 
 -- add instructor
 INSERT INTO `Instructors` (`name`, `title`, `department`, `bio`) VALUES
@@ -199,13 +198,7 @@ INSERT INTO `Courses` (`instructor_id`, `title`, `description`, `price`) VALUES
 
 
 
-
-
-
-
-
-
-data for course module
+-- data for course module
 
 
 INSERT INTO Modules (course_id, title, sort_order) VALUES 
