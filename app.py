@@ -77,7 +77,7 @@ def login_general_process():
             # เพิ่มเงื่อนไขตรวจสอบ Role ตรงนี้
             # ----------------------------------------------------
             if user['role_type'] != 'EXTERNAL':
-                return "<script>alert('บัญชีนี้เป็นของนักศึกษา/บุคลากร โปรดเข้าสู่ระบบผ่านช่องทาง NTNU Login'); window.location.href='/login_ntnu';</script>"
+                return "<script>alert('This account is for students/staff. Please log in through NTNU Login.'); window.location.href='/login_ntnu';</script>"
             
             # ถ้าเป็น EXTERNAL ให้ล็อกอินผ่านตามปกติ
             session['user_id'] = user['id']
