@@ -1,4 +1,6 @@
-#===========================
+import pymysql
+import certifi
+pymysql.install_as_MySQLdb()
 
 from flask import Flask, render_template, request, redirect, session, url_for, flash
 from flask_mysqldb import MySQL
@@ -9,15 +11,17 @@ app = Flask(__name__)
 app.secret_key = 'shida_mooc_key_group16'
 
 # ==========================================
-# MySQL Configuration
+# MySQL Configuration (Aiven.io)
 # ==========================================
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'F096@ggame'
-app.config['MYSQL_DB'] = 'shida_mooc'
+app.config['MYSQL_HOST'] = 'my-course-db-jab2004x-b4a3.e.aivencloud.com'
+app.config['MYSQL_USER'] = 'avnadmin'
+app.config['MYSQL_PASSWORD'] = 'AVNS_mVGqvuKcE9stADofBYJ'
+app.config['MYSQL_DB'] = 'defaultdb' 
+app.config['MYSQL_PORT'] = 23000
+
+app.config['MYSQL_SSL_CA'] = certifi.where()
 
 mysql = MySQL(app)
-
 # ==========================================
 # Routes: Main Pages
 # ==========================================
@@ -69,6 +73,13 @@ def login_general_process():
         cur.close()
         
         if user:
+            # ----------------------------------------------------
+            # เพิ่มเงื่อนไขตรวจสอบ Role ตรงนี้
+            # ----------------------------------------------------
+            if user['role_type'] != 'EXTERNAL':
+                return "<script>alert('บัญชีนี้เป็นของนักศึกษา/บุคลากร โปรดเข้าสู่ระบบผ่านช่องทาง NTNU Login'); window.location.href='/login_ntnu';</script>"
+            
+            # ถ้าเป็น EXTERNAL ให้ล็อกอินผ่านตามปกติ
             session['user_id'] = user['id']
             session['user_name'] = user['name']
             session['user_type'] = user['role_type']
@@ -316,3 +327,8 @@ def checkout():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
+
+    
