@@ -47,7 +47,6 @@
             font-size: 1.6rem;
             font-weight: bold;
             letter-spacing: 1px;
-
         }
 
         .nav-menu {
@@ -63,7 +62,6 @@
             transition: color 0.3s;
         }
 
-        /* 讓當前頁面 (Course) 變成綠色 */
         .nav-item.active {
             color: #4ade80; 
         }
@@ -84,7 +82,7 @@
 
         /* 2. 中間黃色標題區塊 (Course Banner) */
         .course-banner {
-            background-color: #eef296; /* 淺黃色 */
+            background-color: #eef296;
             height: 120px;
             display: flex;
             justify-content: center;
@@ -100,31 +98,70 @@
             color: #000000;
         }
 
-        /* 右上角購物車圖標 */
-        .cart-icon {
+        /* Group for History and Cart Icons */
+        .banner-icons {
             position: absolute;
             right: 50px;
-            font-size: 2.5rem;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .icon-btn {
+            font-size: 2.2rem;
             cursor: pointer;
             text-decoration: none;
             color: #000;
             transition: transform 0.2s;
         }
         
-        .cart-icon:hover {
+        .icon-btn:hover {
             transform: scale(1.1);
         }
 
-        /* 3. 下方三欄式課程卡片區 (Grid Layout) */
+        /* 3. Search Bar */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .search-bar {
+            background-color: #d9d9d9;
+            width: 350px;
+            height: 45px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .search-input {
+            border: none;
+            background: transparent;
+            outline: none;
+            flex: 1;
+            font-size: 1rem;
+        }
+
+        .search-icon {
+            font-size: 1.2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        /* 4. 下方三欄式課程卡片區 */
         .course-container {
             max-width: 1200px;
-            margin: 60px auto;
+            margin: 40px auto 60px auto;
             padding: 0 20px;
             display: grid;
-            grid-template-columns: repeat(3, 100px); /* 限制三欄 */
-            justify-content: center; /* 居中對齊 */
-            column-gap: 130px; /* 卡片左右間距 */
-            row-gap: 50px; /* 卡片上下間距 */
+            grid-template-columns: repeat(3, 220px);
+            justify-content: center;
+            column-gap: 130px;
+            row-gap: 50px;
         }
 
         .course-card-wrapper {
@@ -134,12 +171,11 @@
             gap: 20px;
         }
 
-        /* 灰色圓角卡片 */
         .course-card {
-            background-color: #d9d9d9; /* 淺灰色 */
+            background-color: #d9d9d9;
             width: 220px;
             height: 220px;
-            border-radius: 40px; /* 大圓角 */
+            border-radius: 40px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -162,9 +198,8 @@
             margin-bottom: 15px;
         }
 
-        /* 亮藍色 Add Item 按鈕 */
         .add-btn {
-            background-color: #00bfff; /* 亮藍色 */
+            background-color: #00bfff;
             color: #000;
             text-decoration: none;
             padding: 10px 25px;
@@ -182,9 +217,6 @@
             transform: translateY(-2px);
         }
         
-        .add-btn:active {
-            transform: translateY(0);
-        }
     </style>
 </head>
 <body>
@@ -206,30 +238,35 @@
 
     <div class="course-banner">
         <h1 class="banner-title">Course</h1>
-        <a href="{{ url_for('chart') }}" class="cart-icon">🛒</a>
+        <div class="banner-icons">
+            <a href="#" class="icon-btn" title="Purchase History">📝</a>
+            <a href="{{ url_for('chart') }}" class="icon-btn" title="Shopping Cart">🛒</a>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <form action="{{ url_for('courses') }}" method="GET" class="search-bar">
+            <input type="text" name="search" class="search-input" placeholder="Search courses..." autocomplete="off">
+            <button type="submit" class="search-icon">🔍</button>
+        </form>
     </div>
 
     <div class="course-container">
-        
        {% for course in courses %}
         <div class="course-card-wrapper">
-                <div class="course-card">
-             
-               <div class="course-id">CSU00{{ course.id }}</div>
-                
+            <div class="course-card">
+                <div class="course-id">CSU00{{ course.id }}</div>
                 <div class="course-title-text">{{ course.title }}</div>
                 
                 <div style="margin-top: 10px; font-weight: bold;">
-                    {% if session['user_type'] == 'STUDENT' %}
+                    {% if session['user_type'] == 'STUDENT' or session['user_type'] == 'INTERNAL' %}
                         <span style="color: #28a745;">Price: $0 (Free)</span>
                     {% else %}
-                        Price: ${{ course.price}}
+                        Price: ${{ course.price }}
                     {% endif %}
                 </div>
                 
                 <div>教授 {{ course.teachers }}</div>
-
-
             </div>
             
             {% if course.id in owned_ids %}
@@ -239,8 +276,6 @@
             {% endif %}
         </div>
         {% endfor %}
-       
-
     </div>
 
 </body>
